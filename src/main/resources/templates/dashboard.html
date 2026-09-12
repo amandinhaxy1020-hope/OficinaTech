@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OficinaTech - Painel</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; background: #f4f6f8; padding: 16px; }
+        h1 { color: #1a3c6e; margin-bottom: 20px; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 20px;
+            text-align: center;
+        }
+        .card .numero { font-size: 28px; font-weight: bold; color: #1a3c6e; }
+        .card .texto { font-size: 14px; color: #666; margin-top: 4px; }
+        form { margin-top: 24px; }
+        button {
+            padding: 10px 20px;
+            background: #b3261e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Olá!</h1>
+
+    <div class="cards">
+        <div class="card">
+            <div class="numero">0</div>
+            <div class="texto">Serviços em andamento</div>
+        </div>
+        <div class="card">
+            <div class="numero">0</div>
+            <div class="texto">Prontos para retirada</div>
+        </div>
+        <div class="card">
+            <div class="numero">0</div>
+            <div class="texto">Clientes</div>
+        </div>
+        <div class="card">
+            <div class="numero">0</div>
+            <div class="texto">Materiais em estoque</div>
+        </div>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <button type="submit">Sair</button>
+    </form>
+</body>
+</html>
