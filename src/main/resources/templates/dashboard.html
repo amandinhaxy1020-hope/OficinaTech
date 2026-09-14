@@ -1,24 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OficinaTech - Painel</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; background: #f4f6f8; padding: 16px; }
-        h1 { color: #1a3c6e; margin-bottom: 20px; }
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 16px;
+        }
+
+        h1 {
+            color: #1a3c6e;
+            margin-bottom: 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
         .card {
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             padding: 20px;
             text-align: center;
         }
-        .card .numero { font-size: 28px; font-weight: bold; color: #1a3c6e; }
-        .card .texto { font-size: 14px; color: #666; margin-top: 4px; }
-        form { margin-top: 24px; }
+
+        .card .numero {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1a3c6e;
+        }
+
+        .card .texto {
+            font-size: 14px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .menu a {
+            background: #1a3c6e;
+            color: #fff;
+            text-decoration: none;
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        form {
+            margin-top: 8px;
+        }
+
         button {
             padding: 10px 20px;
             background: #b3261e;
@@ -30,26 +83,34 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Olá!</h1>
 
     <div class="cards">
         <div class="card">
-            <div class="numero">0</div>
+            <div class="numero" th:text="${emAndamento}">0</div>
             <div class="texto">Serviços em andamento</div>
         </div>
         <div class="card">
-            <div class="numero">0</div>
+            <div class="numero" th:text="${prontos}">0</div>
             <div class="texto">Prontos para retirada</div>
         </div>
         <div class="card">
-            <div class="numero">0</div>
+            <div class="numero" th:text="${totalClientes}">0</div>
             <div class="texto">Clientes</div>
         </div>
         <div class="card">
-            <div class="numero">0</div>
+            <div class="numero" th:text="${totalMateriais}">0</div>
             <div class="texto">Materiais em estoque</div>
         </div>
+    </div>
+
+    <div class="menu">
+        <a th:href="@{/clientes}">👤 Clientes</a>
+        <a th:href="@{/servicos}">🔧 Serviços</a>
+        <a th:href="@{/materiais}">📦 Materiais</a>
+        <a th:href="@{/residuos}">♻️ Resíduos</a>
     </div>
 
     <form th:action="@{/logout}" method="post">
@@ -57,4 +118,5 @@
         <button type="submit">Sair</button>
     </form>
 </body>
+
 </html>

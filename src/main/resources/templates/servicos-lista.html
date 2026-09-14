@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OficinaTech - Serviços</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 16px;
+        }
+
+        h1 {
+            color: #1a3c6e;
+            margin-bottom: 16px;
+        }
+
+        .top-bar {
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background: #1a3c6e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .codigo {
+            font-weight: bold;
+            color: #1a3c6e;
+            font-size: 14px;
+        }
+
+        .descricao {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+
+        .cliente {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 16px;
+            color: #1a3c6e;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Serviços</h1>
+
+    <div class="top-bar">
+        <a class="btn" th:href="@{/servicos/novo}">+ Novo Serviço</a>
+    </div>
+
+    <div class="card" th:each="servico : ${servicos}">
+        <div class="codigo" th:text="${servico.codigoAcompanhamento}">OFI-XXXXXX</div>
+        <div class="descricao" th:text="${servico.descricao}">Descrição</div>
+        <div class="cliente" th:text="${servico.cliente.nome}">Cliente</div>
+
+        <form th:action="@{/servicos/{id}/status(id=${servico.id})}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <select name="status" onchange="this.form.submit()">
+                <option
+                    th:each="opcao : ${T(java.util.List).of('Recebido','Em análise','Aguardando material','Em execução','Finalização','Pronto para retirada','Concluído')}"
+                    th:value="${opcao}" th:text="${opcao}" th:selected="${opcao == servico.status}">
+                </option>
+            </select>
+        </form>
+    </div>
+
+    <a class="voltar" th:href="@{/dashboard}">&larr; Voltar ao painel</a>
+</body>
+
+</html>

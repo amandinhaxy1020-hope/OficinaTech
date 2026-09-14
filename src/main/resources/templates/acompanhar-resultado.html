@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OficinaTech - Status do Serviço</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a3c6e;
+            margin-bottom: 4px;
+            font-size: 20px;
+        }
+
+        .codigo {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .descricao {
+            text-align: center;
+            font-size: 15px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .etapa {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .bolinha {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        .feita {
+            background: #2e7d32;
+        }
+
+        .atual {
+            background: #1a3c6e;
+        }
+
+        .pendente {
+            background: #ccc;
+        }
+
+        .voltar {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #1a3c6e;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Serviço encontrado</h1>
+        <div class="codigo" th:text="${servico.codigoAcompanhamento}">OFI-XXXXXX</div>
+        <div class="descricao" th:text="${servico.descricao}">Descrição do serviço</div>
+
+        <div th:each="etapa, iter : ${T(java.util.List).of('Recebido','Em análise','Aguardando material','Em execução','Finalização','Pronto para retirada','Concluído')}"
+            class="etapa">
+            <div class="bolinha"
+                th:classappend="${iter.index < #lists.toList(T(java.util.List).of('Recebido','Em análise','Aguardando material','Em execução','Finalização','Pronto para retirada','Concluído')).indexOf(servico.status) ? 'feita' : (etapa == servico.status ? 'atual' : 'pendente')}"
+                th:text="${iter.index < #lists.toList(T(java.util.List).of('Recebido','Em análise','Aguardando material','Em execução','Finalização','Pronto para retirada','Concluído')).indexOf(servico.status) ? '✓' : ''}">
+            </div>
+            <span th:text="${etapa}">Etapa</span>
+        </div>
+
+        <a class="voltar" th:href="@{/acompanhar}">&larr; Consultar outro código</a>
+    </div>
+</body>
+
+</html>

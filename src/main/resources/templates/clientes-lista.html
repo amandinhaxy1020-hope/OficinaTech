@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OficinaTech - Clientes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 16px;
+        }
+
+        h1 {
+            color: #1a3c6e;
+            margin-bottom: 16px;
+        }
+
+        .top-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            background: #1a3c6e;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #1a3c6e;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 16px;
+            color: #1a3c6e;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Clientes</h1>
+
+    <form class="top-bar" th:action="@{/clientes}" method="get">
+        <input type="text" name="busca" placeholder="Buscar por nome...">
+        <button class="btn" type="submit">Buscar</button>
+        <a class="btn" th:href="@{/clientes/novo}">+ Novo Cliente</a>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Telefone</th>
+                <th>Serviços</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.nome}">Nome</td>
+                <td th:text="${cliente.telefone}">Telefone</td>
+                <td th:text="${cliente.servicos != null ? cliente.servicos.size() : 0}">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="voltar" th:href="@{/dashboard}">&larr; Voltar ao painel</a>
+</body>
+
+</html>
