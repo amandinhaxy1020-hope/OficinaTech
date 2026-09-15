@@ -33,9 +33,12 @@ Substituir controles manuais (caderno, WhatsApp, memória) por uma solução dig
 2. Rode: `mvn spring-boot:run`
 3. Acesse `/login` para a área administrativa, ou `/acompanhar` para a consulta pública
 
-**Usuário administrador padrão** (criado automaticamente na primeira execução):
-- E-mail: `admin@oficinatech.com`
-- Senha: `admin123`
+### Acesso administrativo
+
+Para executar o projeto localmente, configure um usuário administrador
+de demonstração por meio das variáveis/configurações do ambiente.
+
+Não são disponibilizadas credenciais reais neste repositório.
 
 ⚠️ Trocar essa senha antes de qualquer uso real.
 
