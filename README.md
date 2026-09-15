@@ -40,3 +40,15 @@ Substituir controles manuais (caderno, WhatsApp, memória) por uma solução dig
 ⚠️ Trocar essa senha antes de qualquer uso real.
 
 ## Estrutura do sistema
+
+## Segurança
+
+- Senhas armazenadas com hash BCrypt, nunca em texto puro
+- Código de acompanhamento gerado aleatoriamente, não sequencial
+- Rotas administrativas protegidas por autenticação
+- Cliente não tem acesso a nenhum dado interno ou de outros clientes
+- Credenciais do banco de dados nunca versionadas — carregadas via variável de ambiente
+
+## Contexto acadêmico
+
+Este sistema é parte de um projeto de extensão universitária, aplicando conceitos de análise de sistemas, desenvolvimento de software, banco de dados, segurança, usabilidade e educação ambiental em uma necessidade real de uma pequena oficina da comunidade.
